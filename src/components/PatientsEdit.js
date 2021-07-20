@@ -19,6 +19,8 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import ImageUploadCard from './ImageUpload';
+import swal from 'sweetalert';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -90,10 +92,11 @@ export default function PatientsEdit() {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   const handleSubmit = e => {
     e.preventDefault();
     swal({
-      title: 'ต้องการลบข้อมูลผู้ป่วยใช่ไหม?',
+      title: 'ต้องการลบข้อมูลใช่ไหม?',
       text: 'เมื่อลบแล้วจะไม่สามารถกู้คืนข้อมูลได้!',
       icon: 'warning',
       buttons: true,
@@ -108,14 +111,15 @@ export default function PatientsEdit() {
           agency,
           position
         } = e.target.elements;
-        swal('Poof! Your imaginary file has been deleted!', {
-          icon: 'success'
+        swal('ลบข้อมูลเรียบร้อยแล้ว!', {
+          icon: 'success',
+          buttons: false
         });
+        window.location.href = '/Patients';
       } else {
       }
     });
   };
-
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appbar} elevation={0}>
