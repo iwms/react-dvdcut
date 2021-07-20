@@ -120,6 +120,9 @@ export default function PatientsEdit() {
       }
     });
   };
+  const onClickClose = () => {
+    window.location.href = '/Patients';
+  };
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appbar} elevation={0}>
@@ -129,12 +132,13 @@ export default function PatientsEdit() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={onClickClose}
           >
             <CloseIcon />
           </IconButton>
 
           <Typography variant="h6" className={classes.title} align="center">
-            เพิ่มข้อมูลผู้ป่วย
+            แก้ไขข้อมูลผู้ป่วย
           </Typography>
           <IconButton
             edge="start"
@@ -159,9 +163,15 @@ export default function PatientsEdit() {
                   required
                   fullWidth
                   id="cardID"
+                  type="number"
                   label="เลขบัตรประชาชน"
                   error={true ? '' : 'โปรดระบุเลขบัตรประชาชนให้ถูกต้อง.'}
                   helperText={true ? '' : 'โปรดระบุเลขบัตรประชาชนให้ถูกต้อง.'}
+                  onChange={e => {
+                    e.target.value = Math.max(0, parseInt(e.target.value))
+                      .toString()
+                      .slice(0, 13);
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -191,26 +201,30 @@ export default function PatientsEdit() {
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required
                   fullWidth
                   type="number"
                   id="Agency"
                   label="เบอร์โทรศัพท์"
                   name="Agency"
-                  error={true ? '' : 'โปรดระบุสังกัด/หน่วยงานให้ถูกต้อง.'}
-                  helperText={true ? '' : 'โปรดระบุสังกัด/หน่วยงานให้ถูกต้อง.'}
+                  error={true ? '' : 'โปรดระบุเบอร์โทรศัพท์ถูกต้อง.'}
+                  helperText={true ? '' : 'โปรดระบุเบอร์โทรศัพท์ถูกต้อง.'}
+                  onChange={e => {
+                    e.target.value = Math.max(0, parseInt(e.target.value))
+                      .toString()
+                      .slice(0, 10);
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required
                   fullWidth
                   name="Position"
                   label="ที่อยู่"
+                  minRows={3}
                   id="Position"
-                  error={true ? '' : 'โปรดระบุตำแหน่งให้ถูกต้อง.'}
-                  helperText={true ? '' : 'โปรดระบุตำแหน่งให้ถูกต้อง.'}
+                  error={true ? '' : 'โปรดระบุที่อยู่ให้ถูกต้อง.'}
+                  helperText={true ? '' : 'โปรดระบุที่อยู่ให้ถูกต้อง.'}
                 />
               </Grid>
             </Grid>
@@ -221,7 +235,7 @@ export default function PatientsEdit() {
               color="secondary"
               className={classes.cancel}
             >
-              ยกเลิก
+              ลบข้อมูล
             </Button>
           </form>
         </div>

@@ -102,6 +102,9 @@ export default function PatientsAdd() {
       } = e.target.elements;
     }
   };
+  const onClickClose = () => {
+    window.location.href = '/Patients';
+  };
 
   return (
     <div className={classes.root}>
@@ -112,6 +115,7 @@ export default function PatientsAdd() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={onClickClose}
           >
             <CloseIcon />
           </IconButton>
@@ -145,6 +149,11 @@ export default function PatientsAdd() {
                   label="เลขบัตรประชาชน"
                   error={true ? '' : 'โปรดระบุเลขบัตรประชาชนให้ถูกต้อง.'}
                   helperText={true ? '' : 'โปรดระบุเลขบัตรประชาชนให้ถูกต้อง.'}
+                  onChange={e => {
+                    e.target.value = Math.max(0, parseInt(e.target.value))
+                      .toString()
+                      .slice(0, 13);
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -174,26 +183,29 @@ export default function PatientsAdd() {
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required
                   fullWidth
                   type="number"
                   id="Agency"
                   label="เบอร์โทรศัพท์"
                   name="Agency"
-                  error={true ? '' : 'โปรดระบุสังกัด/หน่วยงานให้ถูกต้อง.'}
-                  helperText={true ? '' : 'โปรดระบุสังกัด/หน่วยงานให้ถูกต้อง.'}
+                  error={true ? '' : 'โปรดระบุเบอร์โทรศัพท์ให้ถูกต้อง.'}
+                  helperText={true ? '' : 'โปรดระบุเบอร์โทรศัพท์ให้ถูกต้อง.'}
+                  onChange={e => {
+                    e.target.value = Math.max(0, parseInt(e.target.value))
+                      .toString()
+                      .slice(0, 10);
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required
                   fullWidth
                   name="Position"
                   label="ที่อยู่"
                   id="Position"
-                  error={true ? '' : 'โปรดระบุตำแหน่งให้ถูกต้อง.'}
-                  helperText={true ? '' : 'โปรดระบุตำแหน่งให้ถูกต้อง.'}
+                  error={true ? '' : 'โปรดระบุที่อยู่ให้ถูกต้อง.'}
+                  helperText={true ? '' : 'โปรดระบุที่อยู่ให้ถูกต้อง.'}
                 />
               </Grid>
             </Grid>

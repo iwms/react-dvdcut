@@ -49,8 +49,12 @@ export default function Patients() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [expanded, setExpanded] = React.useState(false);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+  const onClickAdd = () => {
+    window.location.href = '/PatientsAdd';
   };
 
   return (
@@ -62,6 +66,7 @@ export default function Patients() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            style={{ color: '#fff' }}
           >
             <EditIcon />
           </IconButton>
@@ -74,6 +79,7 @@ export default function Patients() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={onClickAdd}
           >
             <AddIcon />
           </IconButton>
@@ -93,6 +99,7 @@ export default function Patients() {
         }}
         showLabels
         className={classes.bnav}
+        style={{ display: 'none' }}
       >
         <BottomNavigationAction label="ที่ดูแล" icon={<RestoreIcon />} />
         <BottomNavigationAction label="ทั้งหมด" icon={<FavoriteIcon />} />

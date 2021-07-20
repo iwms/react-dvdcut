@@ -6,7 +6,7 @@ import Container from '@material-ui/core/Container';
 export default function SimpleContainer() {
   return (
     <div>
-      <image src="" />
+      <image src="https://stackblitz.com/files/iwms/github/iwms/react-dvdcut/master/src/components/Checklist.jpg" />
     </div>
   );
 }

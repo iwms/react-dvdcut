@@ -14,6 +14,8 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PhoneIcon from '@material-ui/icons/Phone';
+import Grow from '@material-ui/core/Grow';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,14 +27,15 @@ const useStyles = makeStyles(theme => ({
     paddingTop: '56.25%' // 16:9
   },
   expand: {
-    transform: 'rotate(-90deg)',
+    transform: 'rotate(0deg)',
+
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest
     })
   },
   expandOpen: {
-    transform: 'rotate(-90deg)'
+    transform: 'rotate(0deg)'
   },
   avatar: {
     backgroundColor: '#3f51b5'
@@ -45,6 +48,9 @@ export default function PatientsCard() {
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+  const onClickEdit = () => {
+    window.location.href = '/PatientsEdit';
   };
 
   return (
@@ -64,8 +70,9 @@ export default function PatientsCard() {
               onClick={handleExpandClick}
               aria-expanded={expanded}
               aria-label="show more"
+              onClick={onClickEdit}
             >
-              <ExpandMoreIcon />
+              <EditIcon />
             </IconButton>
           </CardActions>
         }
