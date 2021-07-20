@@ -18,7 +18,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import ImageUploadCard from './ImageUpload'
+import ImageUploadCard from './ImageUpload';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -176,6 +176,7 @@ export default function PatientsAdd() {
                   variant="outlined"
                   required
                   fullWidth
+                  type="number"
                   id="Agency"
                   label="เบอร์โทรศัพท์"
                   name="Agency"
