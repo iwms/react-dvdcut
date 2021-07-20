@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     marginTop: '55px',
+    marginBottom: '55px',
     flexGrow: 1
   },
   menuButton: {
@@ -44,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SimpleBottomNavigation() {
+export default function Patients() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [expanded, setExpanded] = React.useState(false);
@@ -79,6 +80,7 @@ export default function SimpleBottomNavigation() {
         </Toolbar>
       </AppBar>
 
+      <PatientsCard />
       <PatientsCard />
       <PatientsCard />
       <PatientsCard />

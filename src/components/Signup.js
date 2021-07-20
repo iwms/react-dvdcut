@@ -11,6 +11,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { Redirect } from 'react-router-dom';
+import swal from 'sweetalert';
 
 function Copyright() {
   return (
@@ -60,10 +62,29 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const [age, setAge] = useState('');
+  /*
+  const [lineID, setLineID] = useState('');
+  const [cardID, setCardID] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [agency, setAgency] = useState('');
+  const [position, setPosition] = useState('');*/
+  const [allowRules, setAllowRules] = useState('');
 
-  const handleChange = event => {
-    setAge(event.target.value);
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (allowRules == '') {
+      swal('กดยอมรับเงื่อนไขการใช้งานเพื่อสมัครสมาชิก!');
+    } else {
+      const {
+        lineID,
+        cardID,
+        firstName,
+        lastName,
+        agency,
+        position
+      } = e.target.elements;
+    }
   };
 
   return (
@@ -78,15 +99,15 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Khuiban-aong
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <input
                 type="hidden"
-                id="line_id"
-                name="line_id"
+                id="lineID"
+                name="lineID"
                 required
-                value=""
+                value="1234"
               />
               <TextField
                 name="cardID"
@@ -150,7 +171,18 @@ export default function SignUp() {
 
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                control={
+                  <Checkbox
+                    value=""
+                    name="allowRules"
+                    color="primary"
+                    onChange={e =>
+                      allowRules == ''
+                        ? setAllowRules('checked')
+                        : setAllowRules('')
+                    }
+                  />
+                }
                 label="ฉันยอมรับเงื่อนไขการใช้งาน."
               />
             </Grid>
