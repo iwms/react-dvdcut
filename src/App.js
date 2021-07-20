@@ -3,8 +3,9 @@ import './style.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Patients from './components/Patients';
 import PatientsAdd from './components/PatientsAdd';
-import PatientsEdit from './components/PatientsEdit';
+import PatientsEdit from './components/Wait';
 import Signup from './components/Signup';
+
 
 function App() {
   return (
