@@ -123,6 +123,13 @@ export default function PatientsEdit() {
   const onClickClose = () => {
     window.location.href = '/Patients';
   };
+  const onClickSave = () => {
+    swal('แก้ไขข้อมูลเรียบร้อยแล้ว!', {
+      icon: 'success',
+      buttons: false
+    });
+    window.location.href = '/Patients';
+  };
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appbar} elevation={0}>
@@ -145,6 +152,7 @@ export default function PatientsEdit() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={onClickSave}
           >
             <SaveAltIcon />
           </IconButton>

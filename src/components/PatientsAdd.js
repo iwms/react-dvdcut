@@ -105,6 +105,13 @@ export default function PatientsAdd() {
   const onClickClose = () => {
     window.location.href = '/Patients';
   };
+  const onClickSave = () => {
+    swal('แก้ไขข้อมูลเรียบร้อยแล้ว!', {
+      icon: 'success',
+      buttons: false
+    });
+    window.location.href = '/Patients';
+  };
 
   return (
     <div className={classes.root}>
@@ -128,6 +135,7 @@ export default function PatientsAdd() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={onClickSave}
           >
             <SaveAltIcon />
           </IconButton>
