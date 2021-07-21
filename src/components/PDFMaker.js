@@ -1,9 +1,8 @@
 import React from 'react';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
+/*
 pdfMake.fonts = {
   THSarabunNew: {
     normal: 'THSarabunNew.ttf',
@@ -17,7 +16,7 @@ pdfMake.fonts = {
     italics: 'Roboto-Italic.ttf',
     bolditalics: 'Roboto-MediumItalic.ttf'
   }
-};
+};*/
 
 function PDFMaker() {
   return (
@@ -36,10 +35,7 @@ function PDFMaker() {
 
 function printPDF() {
   var docDefinition = {
-    content: [{ text: 'สร้าง PDF ภาษาไทยด้วย pdfmake ', fontSize: 15 }],
-    defaultStyle: {
-      font: 'THSarabunNew'
-    }
+    content: [{ text: 'สร้าง PDF ภาษาไทยด้วย pdfmake ', fontSize: 15 }]
   };
   pdfMake.createPdf(docDefinition).open();
 }
