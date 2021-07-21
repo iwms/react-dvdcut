@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={PDFMaker} />
+        <Route exact path="/" component={Signup} />
         <Route exact path="/Signup" component={Signup} />
         <Route exact path="/PatientsAdd" component={PatientsAdd} />
         <Route exact path="/PatientsEdit" component={PatientsEdit} />

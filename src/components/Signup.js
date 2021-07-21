@@ -1,4 +1,6 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
+import { useEffect, useState } from 'react';
+import liff from '@line/liff';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -62,6 +64,49 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [pictureUrl, setPictureUrl] = useState('');
+  const [idToken, setIdToken] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
+  const [userId, setUserId] = useState('');
+
+  const logout = () => {
+    liff.logout();
+    window.location.reload();
+  };
+
+  const initLine = () => {
+    liff.init(
+      { liffId: '1656210570-xeM5Jv3e' },
+      () => {
+        if (liff.isLoggedIn()) {
+          runApp();
+        } else {
+          liff.login();
+        }
+      },
+      err => console.error(err)
+    );
+  };
+
+  const runApp = () => {
+    const idToken = liff.getIDToken();
+    setIdToken(idToken);
+    liff
+      .getProfile()
+      .then(profile => {
+        console.log(profile);
+        setDisplayName(profile.displayName);
+        setPictureUrl(profile.pictureUrl);
+        setStatusMessage(profile.statusMessage);
+        setUserId(profile.userId);
+      })
+      .catch(err => console.error(err));
+  };
+
+  useEffect(() => {
+    initLine();
+  }, []);
   /*
   const [lineID, setLineID] = useState('');
   const [cardID, setCardID] = useState('');
@@ -93,11 +138,11 @@ export default function SignUp() {
       <div className={classes.paper}>
         <Avatar
           alt="Khuiban-aong"
-          src="/static/images/avatar/1.jpg"
+          src={pictureUrl ? pictureUrl : '/static/images/avatar/1.jpg'}
           className={classes.avatar}
         />
         <Typography component="h1" variant="h5">
-          Khuiban-aong
+          {displayName ? displayName : 'Khuiban - aong'}
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -107,7 +152,7 @@ export default function SignUp() {
                 id="lineID"
                 name="lineID"
                 required
-                value="1234"
+                value={userId}
               />
               <TextField
                 name="cardID"
