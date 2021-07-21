@@ -1,3 +1,4 @@
+import 'date-fns';
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -8,21 +9,14 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker
+} from '@material-ui/pickers';
 
-const currencies = [
-  {
-    value: 'กรกนก คำหล้า',
-    label: 'กรกนก คำหล้า'
-  },
-  {
-    value: 'นัทมน คนใจสู้',
-    label: 'นัทมน คนใจสู้'
-  },
-  {
-    value: 'ปราณี สิงห์',
-    label: 'ปราณี สิงห์'
-  }
-];
 const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTextField-root': {
@@ -34,6 +28,13 @@ const useStyles = makeStyles(theme => ({
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const [currency, setCurrency] = React.useState('');
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date('2014-08-18T21:11:54')
+  );
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
 
   const handleChange = event => {
     setCurrency(event.target.value);
@@ -56,40 +57,36 @@ export default function FormDialog() {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">เพิ่มข้อมูลขยะติดเชื้อ</DialogTitle>
+        <DialogTitle id="form-dialog-title">แสดงข้อมูลตามช่วงเวลา</DialogTitle>
         <DialogContent>
-          <TextField
-            margin="dense"
-            id="name"
-            label="ประเภทขยะ"
-            type="text"
-            fullWidth
-            defaultValue="ขยะติดเชื้อ"
-            disabled
-          />
-          <TextField
-            margin="dense"
-            id="gw"
-            label="น้ำหนักขยะ"
-            defaultValue="0"
-            type="number"
-            fullWidth
-            disabled
-          />
-          <TextField
-            id="standard-select-currency"
-            select
-            label="ที่มาของขยะ"
-            value={currency}
-            onChange={handleChange}
-            fullWidth
-          >
-            {currencies.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Grid container justifyContent="space-around">
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                label="ระบุวันที่เริ่มต้น"
+                format="dd/mm/yyyy"
+                fullWidth
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date'
+                }}
+              />
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                label="ระบุวันที่สิ้นสุด"
+                format="dd/mm/yyyy"
+                fullWidth
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date'
+                }}
+              />
+            </Grid>
+          </MuiPickersUtilsProvider>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

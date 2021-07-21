@@ -21,7 +21,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import TextField from '@material-ui/core/TextField';
-import WeightCard from './WeightCard';
+import SAOApproveCard from './SAOApproveCard';
 const currencies = [
   {
     value: 'กรกนก คำหล้า',
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Weight() {
+export default function SAOApprove() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [expanded, setExpanded] = React.useState(false);
@@ -105,7 +105,7 @@ export default function Weight() {
           </IconButton>
 
           <Typography variant="h6" className={classes.title} align="center">
-            ข้อมูลขยะ
+            ข้อมูลขยะ - อบต.
           </Typography>
           <IconButton
             edge="start"
@@ -120,18 +120,18 @@ export default function Weight() {
         </Toolbar>
       </AppBar>
 
-      <WeightCard />
-      <WeightCard />
-      <WeightCard />
-      <WeightCard />
-      <WeightCard />
+      <SAOApproveCard />
+      <SAOApproveCard />
+      <SAOApproveCard />
+      <SAOApproveCard />
+      <SAOApproveCard />
 
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">เพิ่มข้อมูลขยะติดเชื้อ</DialogTitle>
+        <DialogTitle id="form-dialog-title">อนุมัติขยะติดเชื้อ</DialogTitle>
         <DialogContent>
           <TextField
             margin="dense"

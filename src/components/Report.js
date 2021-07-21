@@ -1,3 +1,4 @@
+import 'date-fns';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -13,29 +14,26 @@ import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import { alpha } from '@material-ui/core/styles';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker
+} from '@material-ui/pickers';
+import ReportCard from './ReportCard';
 
-import TextField from '@material-ui/core/TextField';
-import WeightCard from './WeightCard';
-const currencies = [
-  {
-    value: 'กรกนก คำหล้า',
-    label: 'กรกนก คำหล้า'
-  },
-  {
-    value: 'นัทมน คนใจสู้',
-    label: 'นัทมน คนใจสู้'
-  },
-  {
-    value: 'ปราณี สิงห์',
-    label: 'ปราณี สิงห์'
-  }
-];
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -65,29 +63,37 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Weight() {
+export default function Report() {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const [expanded, setExpanded] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [currency, setCurrency] = React.useState('');
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedDate2, setSelectedDate2] = React.useState(new Date());
 
-  const handleChange = event => {
-    setCurrency(event.target.value);
+  const handleDateChange = date => {
+    setSelectedDate(date);
+    setSelectedDate2(date);
   };
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleDateChange2 = date => {
+    setSelectedDate2(date);
+    if (date < selectedDate) {
+      setSelectedDate2(selectedDate);
+    }
   };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   const onClickAdd = () => {
-    window.location.href = '/InGarbageAdd';
+    window.location.href = '/PatientsAdd';
+  };
+  const handleClose = () => {
+    setSelectedDate(new Date());
+    setSelectedDate2(new Date());
+    setOpen(false);
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
   return (
@@ -99,13 +105,12 @@ export default function Weight() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
-            style={{ color: '#fff' }}
           >
-            <EditIcon />
+            <PictureAsPdfIcon />
           </IconButton>
 
           <Typography variant="h6" className={classes.title} align="center">
-            ข้อมูลขยะ
+            รายงาน
           </Typography>
           <IconButton
             edge="start"
@@ -113,58 +118,53 @@ export default function Weight() {
             color="inherit"
             aria-label="menu"
             onClick={handleClickOpen}
-            style={{ color: '#fff' }}
           >
-            <AddIcon />
+            <DateRangeIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
 
-      <WeightCard />
-      <WeightCard />
-      <WeightCard />
-      <WeightCard />
-      <WeightCard />
+      <ReportCard />
+      <ReportCard />
+      <ReportCard />
+      <ReportCard />
+      <ReportCard />
 
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">เพิ่มข้อมูลขยะติดเชื้อ</DialogTitle>
+        <DialogTitle id="form-dialog-title">แสดงข้อมูลตามช่วงเวลา</DialogTitle>
         <DialogContent>
-          <TextField
-            margin="dense"
-            id="name"
-            label="ประเภทขยะ"
-            type="text"
-            fullWidth
-            defaultValue="ขยะติดเชื้อ"
-            disabled
-          />
-          <TextField
-            margin="dense"
-            id="gw"
-            label="น้ำหนักขยะ"
-            defaultValue="0.00"
-            type="number"
-            fullWidth
-            disabled
-          />
-          <TextField
-            id="standard-select-currency"
-            select
-            label="ที่มาของขยะ"
-            value={currency}
-            onChange={handleChange}
-            fullWidth
-          >
-            {currencies.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Grid container justifyContent="space-around">
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                label="ระบุวันที่เริ่มต้น"
+                format="dd/MM/yyyy"
+                fullWidth
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date'
+                }}
+              />
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog2"
+                label="ระบุวันที่สิ้นสุด"
+                format="dd/MM/yyyy"
+                fullWidth
+                value={selectedDate2}
+                onChange={handleDateChange2}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date'
+                }}
+              />
+            </Grid>
+          </MuiPickersUtilsProvider>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -175,18 +175,6 @@ export default function Weight() {
           </Button>
         </DialogActions>
       </Dialog>
-      <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        showLabels
-        className={classes.bnav}
-        style={{ display: 'none' }}
-      >
-        <BottomNavigationAction label="ที่ดูแล" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="ทั้งหมด" icon={<FavoriteIcon />} />
-      </BottomNavigation>
     </div>
   );
 }
