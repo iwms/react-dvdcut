@@ -84,5 +84,5 @@ export default function PatientsCard({ addPatient }) {
   );
 }
 PatientsCard.propTypes = {
-  addPatient: PropTypes.func.isRequire
+  addPatient: PropTypes.func.isRequired
 }

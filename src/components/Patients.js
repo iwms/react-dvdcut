@@ -47,6 +47,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Patients() {
+  let pID = 1;
+  let pFname = 'มนต์';
+  let pLname = 'สิงห์ลอ';
+  let pAddr =
+    '11/1 หมู่ที่ 21 ตำบลนครชุม อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000';
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [expanded, setExpanded] = React.useState(false);
@@ -56,13 +61,8 @@ export default function Patients() {
     setExpanded(!expanded);
   };
   const onClickAdd = () => {
-    window.location.href = '/PatientsAdd';
+    addPatient(pID, pFname, pLname, pAddr);
   };
-  let pID = 1;
-  let pFname = 'มนต์';
-  let pLname = 'สิงห์ลอ';
-  let pAddr =
-    '11/1 หมู่ที่ 21 ตำบลนครชุม อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000';
 
   function addPatient(pID, pFname, pLname, pAddr, pProfile) {
     const newPatient = { pID, pFname, pLname, pAddr, pProfile };
@@ -98,8 +98,9 @@ export default function Patients() {
           </IconButton>
         </Toolbar>
       </AppBar>
-
-      <PatientsCard addPatient={addPatient} />
+      {patients.map(patient => (
+        <PatientsCard key={patient.pID} addPatient={addPatient} />
+      ))}
     </div>
   );
 }
