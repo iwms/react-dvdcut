@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PatientsCard() {
+export default function PatientsCard({ pName, pAddr, pProfile }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -57,8 +57,8 @@ export default function PatientsCard() {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+          <Avatar aria-label="recipe" className={classes.avatar} src="">
+            {}
           </Avatar>
         }
         action={
@@ -76,9 +76,8 @@ export default function PatientsCard() {
             </IconButton>
           </CardActions>
         }
-        title="Chorizo Paella"
-        subheader="ที่อยู่: 36/2 หมู่ที่ 1 ตำบลนครชุม อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร
-        "
+        title={pName}
+        subheader={pAddr}
       />
     </Card>
   );

@@ -87,24 +87,11 @@ export default function Patients() {
         </Toolbar>
       </AppBar>
 
-      <PatientsCard />
-      <PatientsCard />
-      <PatientsCard />
-      <PatientsCard />
-      <PatientsCard />
-
-      <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        showLabels
-        className={classes.bnav}
-        style={{ display: 'none' }}
-      >
-        <BottomNavigationAction label="ที่ดูแล" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="ทั้งหมด" icon={<FavoriteIcon />} />
-      </BottomNavigation>
+      <PatientsCard
+        pName="มนต์ สิงห์ลอ"
+        pAddr="11/1 หมู่ที่ 21 ตำบลนครชุม อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000"
+        pProfile=""
+      />
     </div>
   );
 }
