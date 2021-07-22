@@ -1,5 +1,5 @@
 // imports the React Javascript Library
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -47,7 +47,7 @@ const styles = theme => ({
     height: theme.spacing.unit * 15
   },
   secondaryButton: {
-    color: 'gray',
+    color: 'white',
     margin: 10
   },
   typography: {
@@ -90,13 +90,16 @@ class ImageUploadCard extends React.Component {
         selectedFile: [reader.result]
       });
     }.bind(this);
-    console.log(url); // Would see a path?
 
     this.setState({
       mainState: 'uploaded',
       selectedFile: event.target.files[0],
       imageUploaded: 1
     });
+    // Would see a path?
+  };
+  parseImage = e => {
+    console.log(this.setState.selectedFile);
   };
 
   renderInitialState() {

@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PatientsCard({ addPatient }) {
+export default function PatientsCard({ pFname, pLname, pAddr }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -58,7 +58,11 @@ export default function PatientsCard({ addPatient }) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar} src="">
+          <Avatar
+            aria-label="recipe"
+            className={classes.avatar}
+            src={'data:image/jpeg;base64,'}
+          >
             {}
           </Avatar>
         }
@@ -77,12 +81,12 @@ export default function PatientsCard({ addPatient }) {
             </IconButton>
           </CardActions>
         }
-        title={}
-        subheader={}
+        title={pFname + ' ' + pLname}
+        subheader={pAddr}
       />
     </Card>
   );
 }
 PatientsCard.propTypes = {
   addPatient: PropTypes.func.isRequired
-}
+};

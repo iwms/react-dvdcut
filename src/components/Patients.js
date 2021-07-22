@@ -72,16 +72,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function Patients() {
-  let pID = 1;
-  let pFname = 'มนต์';
-  let pLname = 'สิงห์ลอ';
-  let pAddr =
-    '11/1 หมู่ที่ 21 ตำบลนครชุม อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000';
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [expanded, setExpanded] = React.useState(false);
   const [patients, setPatients] = React.useState([]);
   const [open, setOpen] = React.useState(false);
+  const [pID, setPID] = React.useState(1);
+  const [pFname, setPFname] = React.useState('');
+  const [pLname, setPLname] = React.useState('');
+  const [pTel, setPTel] = React.useState('');
+  const [pAddr, setPAddr] = React.useState('');
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -89,12 +89,20 @@ export default function Patients() {
 
   const handleClickOpen = () => {
     setOpen(true);
+    setPID('');
+    setPFname('');
+    setPLname('');
+    setPTel('');
+    setPAddr('');
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-  const onClickAdd = () => {};
+  const onClickSave = () => {
+    addPatient(pID, pFname, pLname, pAddr);
+    setOpen(false);
+  };
   const handleSubmit = e => {
     e.preventDefault();
     if (allowRules == '') {
@@ -114,7 +122,6 @@ export default function Patients() {
   function addPatient(pID, pFname, pLname, pAddr, pProfile) {
     const newPatient = { pID, pFname, pLname, pAddr, pProfile };
     setPatients([newPatient, ...patients]);
-    pID += 1;
   }
 
   return (
@@ -146,7 +153,12 @@ export default function Patients() {
         </Toolbar>
       </AppBar>
       {patients.map(patient => (
-        <PatientsCard key={patient.pID} addPatient={addPatient} />
+        <PatientsCard
+          key={patient.pID}
+          pFname={patient.pFname}
+          pLname={patient.pLname}
+          pAddr={patient.pAddr}
+        />
       ))}
 
       <Dialog
@@ -168,7 +180,7 @@ export default function Patients() {
             <Typography variant="h6" className={classes.title2}>
               เพิ่มข้อมูลผู้ป่วย
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            <Button autoFocus color="inherit" onClick={onClickSave}>
               บันทึก
             </Button>
           </Toolbar>
@@ -177,7 +189,7 @@ export default function Patients() {
           <CssBaseline />
           <div className={classes.paper}>
             <ImageUploadCard />
-            <form className={classes.form} noValidate onSubmit={handleSubmit}>
+            <form className={classes.form} noValidate>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -193,6 +205,7 @@ export default function Patients() {
                       e.target.value = Math.max(0, parseInt(e.target.value))
                         .toString()
                         .slice(0, 13);
+                      setPID(e.target.value);
                     }}
                   />
                 </Grid>
@@ -206,6 +219,9 @@ export default function Patients() {
                     label="ชื่อ"
                     error={true ? '' : 'โปรดระบุชื่อให้ถูกต้อง.'}
                     helperText={true ? '' : 'โปรดระบุชื่อให้ถูกต้อง.'}
+                    onChange={e => {
+                      setPFname(e.target.value);
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -218,6 +234,9 @@ export default function Patients() {
                     name="lastName"
                     error={true ? '' : 'โปรดระบุนามสกุลให้ถูกต้อง.'}
                     helperText={true ? '' : 'โปรดระบุนามสกุลให้ถูกต้อง.'}
+                    onChange={e => {
+                      setPLname(e.target.value);
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -246,6 +265,9 @@ export default function Patients() {
                     id="Position"
                     error={true ? '' : 'โปรดระบุที่อยู่ให้ถูกต้อง.'}
                     helperText={true ? '' : 'โปรดระบุที่อยู่ให้ถูกต้อง.'}
+                    onChange={e => {
+                      setPAddr(e.target.value);
+                    }}
                   />
                 </Grid>
               </Grid>
