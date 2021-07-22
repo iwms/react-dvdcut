@@ -100,7 +100,9 @@ export default function Patients() {
     setOpen(false);
   };
   const onClickSave = () => {
-    addPatient(pID, pFname, pLname, pAddr);
+    if (pID != '' && pFname != '' && pLname != '' && pAddr != '') {
+      addPatient(pID, pFname, pLname, pAddr);
+    }
     setOpen(false);
   };
   const handleSubmit = e => {
@@ -253,6 +255,7 @@ export default function Patients() {
                       e.target.value = Math.max(0, parseInt(e.target.value))
                         .toString()
                         .slice(0, 10);
+                      setPTel(e.target.value);
                     }}
                   />
                 </Grid>
