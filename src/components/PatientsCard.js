@@ -16,6 +16,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Grow from '@material-ui/core/Grow';
 import EditIcon from '@material-ui/icons/Edit';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PatientsCard({ pName, pAddr, pProfile }) {
+export default function PatientsCard({ addPatient }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -76,9 +77,12 @@ export default function PatientsCard({ pName, pAddr, pProfile }) {
             </IconButton>
           </CardActions>
         }
-        title={pName}
-        subheader={pAddr}
+        title={}
+        subheader={}
       />
     </Card>
   );
+}
+PatientsCard.propTypes = {
+  addPatient: PropTypes.func.isRequire
 }

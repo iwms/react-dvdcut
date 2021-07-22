@@ -50,6 +50,7 @@ export default function Patients() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [expanded, setExpanded] = React.useState(false);
+  const [patients, setPatients] = React.useState([]);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -57,6 +58,17 @@ export default function Patients() {
   const onClickAdd = () => {
     window.location.href = '/PatientsAdd';
   };
+  let pID = 1;
+  let pFname = 'มนต์';
+  let pLname = 'สิงห์ลอ';
+  let pAddr =
+    '11/1 หมู่ที่ 21 ตำบลนครชุม อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000';
+
+  function addPatient(pID, pFname, pLname, pAddr, pProfile) {
+    const newPatient = { pID, pFname, pLname, pAddr, pProfile };
+    setPatients([newPatient, ...patients]);
+    pID += 1;
+  }
 
   return (
     <div className={classes.root}>
@@ -87,11 +99,7 @@ export default function Patients() {
         </Toolbar>
       </AppBar>
 
-      <PatientsCard
-        pName="มนต์ สิงห์ลอ"
-        pAddr="11/1 หมู่ที่ 21 ตำบลนครชุม อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000"
-        pProfile=""
-      />
+      <PatientsCard addPatient={addPatient} />
     </div>
   );
 }
