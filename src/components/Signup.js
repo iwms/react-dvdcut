@@ -65,11 +65,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Signup() {
   const classes = useStyles();
-  const [pictureUrl, setPictureUrl] = useState('7');
+  const [pictureUrl, setPictureUrl] = useState('8');
   const [idToken, setIdToken] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
-  const [userId, setUserId] = useState('7');
+  const [userId, setUserId] = useState('8');
 
   const logout = () => {
     liff.logout();
@@ -102,15 +102,15 @@ export default function Signup() {
         setStatusMessage(profile.statusMessage);
         setUserId(profile.userId);
         axios
-          .post(`http://localhost:5000/api/users/${userId}`)
+          .get(`http://localhost:5000/api/users/${profile.userId}`)
           .then(res =>
-            res.data.lineid != ''
+            res.data.length != 
               ? swal(
                   'ท่านได้สมัครสมาชิกเรียบร้อยแล้ว!',
                   'โปรดรอการตรวจสอบจากผู้ดูแลระบบ!',
                   'success'
                 )
-              : console.log(res.data)
+              : console.log('ยังไม่ได้สมัครสมาชิก!')
           )
           .catch(err => console.log('Error: ' + err));
       })
@@ -118,7 +118,7 @@ export default function Signup() {
   };
 
   useEffect(() => {
-    /initLine();
+    initLine();
   }, []);
   const [cardID, setCardID] = useState('');
   const [firstName, setFirstName] = useState('');
