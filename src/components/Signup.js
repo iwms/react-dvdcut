@@ -104,7 +104,7 @@ export default function Signup() {
         axios
           .get(`http://localhost:5000/api/users/${profile.userId}`)
           .then(res =>
-            res.data.length != 
+            res.data.length != 0
               ? swal(
                   'ท่านได้สมัครสมาชิกเรียบร้อยแล้ว!',
                   'โปรดรอการตรวจสอบจากผู้ดูแลระบบ!',
@@ -118,7 +118,7 @@ export default function Signup() {
   };
 
   useEffect(() => {
-    initLine();
+    /initLine();
   }, []);
   const [cardID, setCardID] = useState('');
   const [firstName, setFirstName] = useState('');
