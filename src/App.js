@@ -11,13 +11,13 @@ import Weight from './components/Weight';
 import SAOApprove from './components/SAOApprove';
 import SDHApprove from './components/SDHApprove';
 import Report from './components/Report';
-import PDFMaker from './components/PDFMaker';
+
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Signup} />
+        <Route exact path="/" component={InGarbage} />
         <Route exact path="/Signup" component={Signup} />
         <Route exact path="/PatientsAdd" component={PatientsAdd} />
         <Route exact path="/PatientsEdit" component={PatientsEdit} />
