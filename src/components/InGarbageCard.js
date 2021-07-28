@@ -30,6 +30,7 @@ const currencies = [
     label: 'ปราณี สิงห์'
   }
 ];
+
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '100%',
@@ -103,8 +104,8 @@ export default function InGarbageCard() {
               </IconButton>
             </CardActions>
           }
-          title="ขยะติดเชื้อ #123"
-          subheader="น้ำหนัก: 0.00 กิโลกรัม สถานะ: รอการชั่งน้ำหนัก "
+          title={`${'ขยะติดเชื้อ'} / น้ำหนัก: ${'0.00'} กิโลกรัม`}
+          subheader={` สถานะ: ${'รอการชั่งน้ำหนัก'}`}
         />
         <Collapse in={false} timeout="auto" unmountOnExit>
           <CardContent />

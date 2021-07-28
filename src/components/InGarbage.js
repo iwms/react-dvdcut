@@ -1,9 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -16,10 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem';
-
 import TextField from '@material-ui/core/TextField';
 import InGarbageCard from './InGarbageCard';
 const currencies = [
@@ -34,6 +28,38 @@ const currencies = [
   {
     value: 'ปราณี สิงห์',
     label: 'ปราณี สิงห์'
+  }
+];
+const garbages = [
+  {
+    _id: '60fb8e2e5d2c8029c8efbf59',
+    GarbageTypeID: '0',
+    GarbageStatusID: '1',
+    GarbageWeightID: '',
+    SAOAprroveID: '',
+    SDHAprroveID: '',
+    PatientID: '1',
+    LineID: 'Ub5b764acf032b00f37575df1ba68e54d'
+  },
+  {
+    _id: '60fb8e2e5d2c8029c8efbf59',
+    GarbageTypeID: '0',
+    GarbageStatusID: '1',
+    GarbageWeightID: '',
+    SAOAprroveID: '',
+    SDHAprroveID: '',
+    PatientID: '1',
+    LineID: 'Ub5b764acf032b00f37575df1ba68e54d'
+  },
+  {
+    _id: '60fb8e2e5d2c8029c8efbf59',
+    GarbageTypeID: '0',
+    GarbageStatusID: '1',
+    GarbageWeightID: '',
+    SAOAprroveID: '',
+    SDHAprroveID: '',
+    PatientID: '1',
+    LineID: 'Ub5b764acf032b00f37575df1ba68e54d'
   }
 ];
 const useStyles = makeStyles(theme => ({
@@ -120,10 +146,6 @@ export default function InGarbage() {
       </AppBar>
 
       <InGarbageCard />
-      <InGarbageCard />
-      <InGarbageCard />
-      <InGarbageCard />
-      <InGarbageCard />
 
       <Dialog
         open={open}
@@ -174,18 +196,6 @@ export default function InGarbage() {
           </Button>
         </DialogActions>
       </Dialog>
-      <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        showLabels
-        className={classes.bnav}
-        style={{ display: 'none' }}
-      >
-        <BottomNavigationAction label="ที่ดูแล" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="ทั้งหมด" icon={<FavoriteIcon />} />
-      </BottomNavigation>
     </div>
   );
 }
